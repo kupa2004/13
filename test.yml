@@ -14,3 +14,6 @@
   
   roles:
     - runner
+    
+  vars:
+    ip_db:  
