@@ -1,0 +1,16 @@
+---
+- name: package boxfuse
+  hosts: db
+  remote_user: root
+  become: true
+
+  roles:
+    - builder
+    
+- name: run boxfuse
+  hosts: web
+  remote_user: root
+  become: true
+  
+  roles:
+    - runner
