@@ -1,0 +1,47 @@
+ - name: Update system
+      apt: update_cache=yes
+
+    - name: Install modules
+      apt:
+        name: default-jdk
+        state: present
+
+    - name: Create directory
+      file:
+        path: /home/boxfuse-sample-java-war-hello
+        state: directory
+
+    - name: Clone boxfuse
+      git:
+        repo: 'https://github.com/boxfuse/boxfuse-sample-java-war-hello.git'
+        dest: /home/boxfuse-sample-java-war-hello/
+
+    - name: install maven
+      become: yes
+      apt:
+        pkg: maven
+        state: latest
+        update_cache: yes
+        cache_valid_time: 3600
+      with_items:
+        - maven
+
+    - name: Build boxfuse
+      command: 'mvn package'
+      args:
+        chdir: /home/boxfuse-sample-java-war-hello/
+
+    - name: Create directory
+      file:
+        path: /home/HW_8/
+        state: directory
+
+    - name: Clone tomcat.service
+      git:
+        repo: 'https://github.com/kupa2004/HW_8.git'
+        dest: /home/HW_8/
+
+    - name: Remove tomcat.service
+      copy:
+        src: tomcat.service
+        dest: /
