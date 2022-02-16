@@ -1,34 +1,32 @@
- - name: Update system
-      apt: update_cache=yes
+- name: Update system
+  apt: update_cache=yes
 
-    - name: Install modules
-      apt:
-        name: default-jdk
-        state: present
+- name: Install modules
+  apt:
+    name: default-jdk
+    state: present
 
-    - name: Create directory
-      file:
-        path: /home/boxfuse-sample-java-war-hello
-        state: directory
+- name: Create directory
+  file:
+    path: /home/boxfuse-sample-java-war-hello
+   state: directory
 
-    - name: Clone boxfuse
-      git:
-        repo: 'https://github.com/boxfuse/boxfuse-sample-java-war-hello.git'
-        dest: /home/boxfuse-sample-java-war-hello/
+- name: Clone boxfuse
+  git:
+    repo: 'https://github.com/boxfuse/boxfuse-sample-java-war-hello.git'
+    dest: /home/boxfuse-sample-java-war-hello/
 
-    - name: install maven
-      become: yes
-      apt:
-        pkg: maven
-        state: latest
-        update_cache: yes
-        cache_valid_time: 3600
-      with_items:
-        - maven
+- name: install maven
+  become: yes
+  apt:
+    pkg: maven
+    state: latest
+    update_cache: yes
+    cache_valid_time: 3600
+  with_items:
+    - maven
 
-    - name: Build boxfuse
-      command: 'mvn package'
-      args:
-        chdir: /home/boxfuse-sample-java-war-hello/
-
-
+- name: Build boxfuse
+  command: 'mvn package'
+  args:
+    chdir: /home/boxfuse-sample-java-war-hello/
