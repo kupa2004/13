@@ -9,7 +9,7 @@
 - name: Create directory
   file:
     path: /home/boxfuse-sample-java-war-hello
-   state: directory
+    state: directory
 
 - name: Clone boxfuse
   git:

@@ -20,6 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b60d4103-6cd6-408b-9d7c-77279239c5a9" name="Default Changelist" comment="1">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/roles/builder/tasks/main.yml" beforeDir="false" afterPath="$PROJECT_DIR$/roles/builder/tasks/main.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/roles/runner/tasks/main.yml" beforeDir="false" afterPath="$PROJECT_DIR$/roles/runner/tasks/main.yml" afterDir="false" />
     </list>
@@ -97,7 +98,14 @@
       <option name="project" value="LOCAL" />
       <updated>1645004043711</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="1">
+      <created>1645004931906</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1645004931906</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -121,10 +129,10 @@
       <screen x="-1920" y="0" width="1536" height="832" />
     </state>
     <state x="-1671" y="0" key="#Project_Structure/-1920.0.1536.832/0.0.1920.1040@-1920.0.1536.832" timestamp="1644933399256" />
-    <state x="451" y="165" key="Vcs.Push.Dialog.v2" timestamp="1645004044996">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="-1559" y="132" key="Vcs.Push.Dialog.v2" timestamp="1645004933169">
+      <screen x="-1920" y="0" width="1536" height="832" />
     </state>
-    <state x="-1559" y="132" key="Vcs.Push.Dialog.v2/-1920.0.1536.832/0.0.1920.1040@-1920.0.1536.832" timestamp="1644933506508" />
+    <state x="-1559" y="132" key="Vcs.Push.Dialog.v2/-1920.0.1536.832/0.0.1920.1040@-1920.0.1536.832" timestamp="1645004933169" />
     <state x="451" y="165" key="Vcs.Push.Dialog.v2/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1645004044996" />
   </component>
 </project>
