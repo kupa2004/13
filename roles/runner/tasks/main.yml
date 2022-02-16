@@ -31,13 +31,13 @@
     extra_opts: [--strip-components=1]
 
 - name: Change ownership
-   file:
-     path: /opt/tomcat
-     owner: tomcat
-     group: tomcat
-     mode: "u+rwx,g+rx,o=rx"
-     recurse: yes
-     state: directory
+  file:
+    path: /opt/tomcat
+    owner: tomcat
+    group: tomcat
+    mode: "u+rwx,g+rx,o=rx"
+    recurse: yes
+    state: directory
 
 - name: Copy Tomcat service from local to remote
   copy:
