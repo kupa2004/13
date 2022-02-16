@@ -59,4 +59,4 @@
 
 - name: Copy boxfuse
   synchronize: src=/home/boxfuse-sample-java-war-hello/target/ dest=/opt/tomcat/webapps/
-  delegate_to: {{ip_db}}
+  delegate_to: "{{ ip_db }}"
