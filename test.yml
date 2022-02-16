@@ -11,9 +11,11 @@
   hosts: web
   remote_user: root
   become: true
-  
+
+  vars:
+    ip_db:  51.250.24.96
+
   roles:
     - runner
     
-  vars:
-    ip_db:  51.250.24.96
+
