@@ -14,19 +14,18 @@
             - 22
           cidr_ip: 0.0.0.0/0
 
-  - name: create a new ec2 key pair
+  - name: Create an EC2 key
     ec2_key:
-      name: key325
-      region: us-east-1
-      key_material: "{{ lookup('file', '~/.ssh/my-key325.pem') }}"
-    register: keypair
+      name: "key325"
+      region: "eu-west-1"
+    register: ec2_key
 
-  - name: Give permissions 400 to an existing file my-key325.pem
-    ansible.builtin.file:
-      path: root/.ssh/my-key325.pem
-      owner: root
-      group: root
-      mode: '0400'
+  - name: save private key
+    copy:
+      content: "{{ ec2_key.key.private_key }}"
+      dest: "./aws-private.pem"
+      mode: 0400
+    when: ec2_key.changed
 
   - name: create instance
     ec2:
