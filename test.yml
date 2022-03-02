@@ -1,13 +1,19 @@
 ---
 - hosts: localhost
   remote_user: root
+  vars:
+    keypair: mykey325
+    instance_type: t2.micro
+    security_group: MyGroup325
+    image: ami-04505e74c0741db8d
+    region: us-east-1
 
   tasks:
   - name: create a security group in AWS
     ec2_group:
       name: MyGroup325
       description: allow 22 port
-      region: us-east-1
+      region: "{{ region }}"
       rules:
         - proto: tcp
           ports:
@@ -17,7 +23,7 @@
   - name: Create an EC2 key
     ec2_key:
       name: mykey325
-      region: us-east-1
+      region: "{{ region }}"
     register: ec2_key
 
   - name: save private key
@@ -27,37 +33,60 @@
       mode: 0600
     when: ec2_key.changed
 
-  - name: create instance
+  - name: create instance 1
     ec2:
-      key_name: mykey325
-      group: MyGroup325
-      region: us-east-1
-      instance_type: t2.micro
-      image: ami-04505e74c0741db8d
+      key_name: "{{ keypair }}"
+      group: "{{ security_group }}"
+      region: "{{ region }}"
+      instance_type: "{{ instance_type }}"
+      image: "{{ image }}"
+      instance_profile_name: inst1
+      wait: yes
+      wait_timeout: 500
       volumes:
         - device_name: /dev/sdh
           volume_size: 15
       count_tag:
-        Name: dbserver
-      exact_count: 2
+        Name: dbserver1
+      exact_count: 1
+    tasks:
+    - debug:
+      var: ansible_all_ipv4_addresses
 
-  #- name: package boxfuse
-  #  hosts: db
-  #  remote_user: root
-  #  become: true
+    - name: package boxfuse
+      hosts: inst1
+      remote_user: root
+      become: true
 
-  #  roles:
-  #    - builder
+     roles:
+       - builder
+       -
+  - name: create instance 1
+    ec2:
+      key_name: "{{ keypair }}"
+      group: "{{ security_group }}"
+      region: "{{ region }}"
+      instance_type: "{{ instance_type }}"
+      image: "{{ image }}"
+      instance_profile_name: inst2
+      wait: yes
+      wait_timeout: 500
+      volumes:
+        - device_name: /dev/sdh
+          volume_size: 15
+      count_tag:
+        Name: dbserver2
+      exact_count: 1
+      tasks:
+      - name: run boxfuse
+        hosts: builder
+        remote_user: root
+        become: true
 
-  #- name: run boxfuse
-  #  hosts: web
-  #  remote_user: root
-  #  become: true
+        vars:
+          ip_db:  inst1
 
-  #  vars:
-  #    ip_db:  84.201.165.201
-
-  #  roles:
-  #    - runner
+        roles:
+          - runner
 
 
