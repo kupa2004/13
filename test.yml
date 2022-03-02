@@ -37,7 +37,6 @@
       volumes:
         - device_name: /dev/sdh
           volume_size: 15
-      assign_public_ip: yes
       count_tag:
         Name: dbserver
       exact_count: 2
