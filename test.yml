@@ -17,9 +17,10 @@
   - name: Create an EC2 key
     ec2_key:
       name: mykey325
-      key_material: "{{ lookup('file', '/tmp/mykey325.pub') }}"
       region: eu-west-1
+      key_material: "{{ item }}"
     register: ec2_key
+    with_file: ~/.ssh/mykey325.pub
 
   - name: save private key
     copy:
@@ -27,6 +28,13 @@
       dest: "~/.ssh/mykey325.pem"
       mode: 0600
     when: ec2_key.changed
+
+  - name: Create an EC2 key
+    ec2_key:
+      name: mykey325
+      key_material: "{{ lookup('file', '/tmp/mykey325.pub') }}"
+      region: eu-west-1
+    register: ec2_key
 
   - name: create instance
     ec2:
