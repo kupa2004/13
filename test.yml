@@ -108,7 +108,6 @@
   hosts: runbuild
   remote_user: root
   become: true
-  gather_facts: True
   roles:
     - builder
 
@@ -116,7 +115,6 @@
   hosts: testapp
   remote_user: root
   become: true
-  gather_facts: True
 
   vars:
     ip_db:  runbuild
