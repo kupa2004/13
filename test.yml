@@ -40,7 +40,6 @@
       region: "{{ region }}"
       instance_type: "{{ instance_type }}"
       image: "{{ image }}"
-      instance_profile_name: inst1
       wait: yes
       wait_timeout: 500
       volumes:
@@ -48,16 +47,18 @@
           volume_size: 15
       count_tag:
         Name: dbserver1
+      instance_tags:
+          Environment: Test
+          Name: MyTest
       exact_count: 1
 
-  - name: create instance 1
+  - name: create instance 2
     ec2:
       key_name: "{{ keypair }}"
       group: "{{ security_group }}"
       region: "{{ region }}"
       instance_type: "{{ instance_type }}"
       image: "{{ image }}"
-      instance_profile_name: inst2
       wait: yes
       wait_timeout: 500
       volumes:
@@ -65,10 +66,13 @@
           volume_size: 15
       count_tag:
         Name: dbserver2
+      instance_tags:
+          Environment: MyTest
+          Name: MyTestApp
       exact_count: 1
 
 - name: run boxfuse
-  hosts: inst2
+  hosts: MyTest
   remote_user: root
   become: true
 
@@ -79,7 +83,7 @@
     - runner
 
 - name: package boxfuse
-  hosts: inst1
+  hosts: MyTestApp
   remote_user: root
   become: true
   roles:
