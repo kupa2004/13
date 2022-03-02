@@ -16,21 +16,21 @@
 
   - name: Create an EC2 key
     ec2_key:
-      name: key325
+      name: key326
       region: eu-west-1
     register: ec2_key
 
   - name: save private key
     copy:
       content: "{{ ec2_key.key.private_key }}"
-      dest: ./key325.pem
-      mode: 0400
+      dest: "./key326.pem"
+      mode: 0600
     when: ec2_key.changed
 
   - name: create instance
     ec2:
-      key_name: my-key325
-      group: MySecurityGroup325
+      key_name: key326
+      group: MyGroup325
       vpc_subnet_id: subnet-29e63245
       region: eu-west-1
       instance_type: t2.micro
