@@ -95,6 +95,13 @@
       timeout: 320
     loop: "{{ ec2.instances }}"
 
+- name: package boxfuse
+  hosts: runbuild
+  remote_user: root
+  become: true
+  roles:
+    - builder
+
 - name: run boxfuse
   hosts: testapp
   remote_user: root
@@ -105,10 +112,3 @@
 
   roles:
     - runner
-
-- name: package boxfuse
-  hosts: runbuild
-  remote_user: root
-  become: true
-  roles:
-    - builder
