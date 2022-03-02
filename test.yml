@@ -26,7 +26,7 @@
       path: ~/.ssh/my-key325.pem
       owner: root
       group: root
-      mode: '400'
+      mode: '0400'
 
   - name: create instance
     ec2:
