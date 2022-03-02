@@ -27,10 +27,10 @@
       mode: 0600
     when: ec2_key.changed
 
-- name: Upload the public key to EC2 as a new key pair
-  ec2_key_pair:
-    name: mykey325
-    public_key: "{{ lookup('file', '/tmp/mykey325.pub') }}"
+  - name: Upload the public key to EC2 as a new key pair
+    ec2_key_pair:
+      name: mykey325
+      public_key: "{{ lookup('file', '/tmp/mykey325.pub') }}"
 
   - name: create instance
     ec2:
