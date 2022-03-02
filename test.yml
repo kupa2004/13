@@ -50,14 +50,6 @@
         Name: dbserver1
       exact_count: 1
 
-  - name: package boxfuse
-    hosts: inst1
-    remote_user: root
-    become: true
-
-    roles:
-      - builder
-
   - name: create instance 1
     ec2:
       key_name: "{{ keypair }}"
@@ -75,14 +67,20 @@
         Name: dbserver2
       exact_count: 1
 
-  - name: run boxfuse
-    hosts: inst2
-    remote_user: root
-    become: true
+- name: run boxfuse
+  hosts: inst2
+  remote_user: root
+  become: true
 
-    vars:
-      ip_db:  inst1
-    roles:
-       - runner
+  vars:
+    ip_db:  inst1
 
+  roles:
+    - runner
 
+- name: package boxfuse
+  hosts: inst1
+  remote_user: root
+  become: true
+  roles:
+    - builder
