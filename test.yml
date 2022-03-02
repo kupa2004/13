@@ -58,8 +58,8 @@
       remote_user: root
       become: true
 
-     roles:
-       - builder
+      roles:
+        - builder
 
   - name: create instance 1
     ec2:
