@@ -45,12 +45,24 @@
       volumes:
         - device_name: /dev/sdh
           volume_size: 15
-      count_tag:
-        Name: dbserver1
       instance_tags:
           Environment: Test
-          Name: MyTest
+          Name: runbuild
       exact_count: 1
+    register: ec2
+
+  - name: Add new instance 1 to host group
+    add_host:
+      hostname: "{{ item.public_ip }}"
+      groupname: runbuild
+    loop: "{{ ec2.instances }}"
+
+  - name: Wait for SSH to come up
+    delegate_to: "{{ item.public_dns_name }}"
+    wait_for_connection:
+      delay: 60
+      timeout: 320
+    loop: "{{ ec2.instances }}"
 
   - name: create instance 2
     ec2:
@@ -64,26 +76,38 @@
       volumes:
         - device_name: /dev/sdh
           volume_size: 15
-      count_tag:
-        Name: dbserver2
       instance_tags:
           Environment: MyTest
           Name: MyTestApp
       exact_count: 1
+    register: ec2
+
+  - name: Add new instance 2 to host group
+    add_host:
+      hostname: "{{ item.public_ip }}"
+      groupname: testapp
+    loop: "{{ ec2.instances }}"
+
+  - name: Wait for SSH to come up
+    delegate_to: "{{ item.public_dns_name }}"
+    wait_for_connection:
+      delay: 60
+      timeout: 320
+    loop: "{{ ec2.instances }}"
 
 - name: run boxfuse
-  hosts: MyTest
+  hosts: testapp
   remote_user: root
   become: true
 
   vars:
-    ip_db:  inst1
+    ip_db:  runbuild
 
   roles:
     - runner
 
 - name: package boxfuse
-  hosts: MyTestApp
+  hosts: runbuild
   remote_user: root
   become: true
   roles:
