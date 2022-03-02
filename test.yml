@@ -22,8 +22,8 @@
     register: keypair
 
   - name: Give permissions 400 to an existing file my-key325.pem
-    builtin.file:
-      path: ~/.ssh/my-key325.pem
+    ansible.builtin.file:
+      path: root/.ssh/my-key325.pem
       owner: root
       group: root
       mode: '0400'
