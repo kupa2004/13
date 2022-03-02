@@ -48,7 +48,7 @@
       instance_tags:
           Environment: Test
           Name: runbuild
-      exact_count: 1
+      count: 1
     register: ec2
 
   - name: Add new instance 1 to host group
@@ -79,7 +79,7 @@
       instance_tags:
           Environment: MyTest
           Name: MyTestApp
-      exact_count: 1
+      count: 1
     register: ec2
 
   - name: Add new instance 2 to host group
