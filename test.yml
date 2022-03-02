@@ -60,7 +60,7 @@
 
      roles:
        - builder
-       -
+
   - name: create instance 1
     ec2:
       key_name: "{{ keypair }}"
