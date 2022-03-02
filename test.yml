@@ -9,7 +9,7 @@
     region: us-east-1
 
   tasks:
-  - name: create a security group in AWS
+  - name: Create a security group in AWS
     ec2_group:
       name: MyGroup325
       description: allow 22 port
@@ -26,14 +26,14 @@
       region: "{{ region }}"
     register: ec2_key
 
-  - name: save private key
+  - name: Save private key
     copy:
       content: "{{ ec2_key.key.private_key }}"
       dest: "~/.ssh/id_rsa.pem"
       mode: 0600
     when: ec2_key.changed
 
-  - name: create instance 1
+  - name: Create instance 1
     ec2:
       key_name: "{{ keypair }}"
       group: "{{ security_group }}"
@@ -65,7 +65,7 @@
       state: started
     with_items: "{{ ec2.instances }}"
 
-  - name: create instance 2
+  - name: Create instance 2
     ec2:
       key_name: "{{ keypair }}"
       group: "{{ security_group }}"
@@ -99,12 +99,12 @@
 
   - name: Wait for SSH to come up
     wait_for:
-      hostname: "{{ item.public_ip }}"
+      host: "{{ item.public_ip }}"
       port: 22
       state: started
     with_items: "{{ ec2.instances }}"
 
-- name: package boxfuse
+- name: Package boxfuse
   hosts: runbuild
   remote_user: root
   become: true
@@ -112,7 +112,7 @@
   roles:
     - builder
 
-- name: run boxfuse
+- name: Run boxfuse
   hosts: testapp
   remote_user: root
   become: true
