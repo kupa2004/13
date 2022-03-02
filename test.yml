@@ -1,21 +1,63 @@
 ---
-- name: package boxfuse
-  hosts: db
-  remote_user: root
-  become: true
+- name: create a security group in AWS
+  ec2_group:
+    name: MyGroup325
+    description: allow 22 port
+    region: us-east-1
+    rules:
+      - proto: tcp
+        ports:
+          - 22
+        cidr_ip: 0.0.0.0/0
 
-  roles:
-    - builder
+- name: create a new ec2 key pair
+  ec2_key:
+    name: key325
+    region: us-east-1
+    key_material: "{{ lookup('file', '~/.ssh/my-key325.pem') }}"
+  register: keypair
+
+- name: Give permissions 400 to an existing file my-key325.pem
+  builtin.file:
+    path: ~/.ssh/my-key325.pem
+    owner: root
+    group: root
+    mode: '400'
+
+- name:
+  ec2:
+    key_name: key325
+    group: MyGroup325
+    instance_type: t2.micro
+    image: ami-04505e74c0741db8d
+    wait: yes
+    wait_timeout: 500
+    volumes:
+      - device_name: /dev/sdh
+        volume_size: 15
+    vpc_subnet_id: subnet-29e63245
+    assign_public_ip: yes
+    count_tag:
+      Name: dbserver
+    exact_count: 2
+
+#- name: package boxfuse
+#  hosts: db
+#  remote_user: root
+#  become: true
+
+#  roles:
+#    - builder
     
-- name: run boxfuse
-  hosts: web
-  remote_user: root
-  become: true
+#- name: run boxfuse
+#  hosts: web
+#  remote_user: root
+#  become: true
 
-  vars:
-    ip_db:  84.201.165.201
+#  vars:
+#    ip_db:  84.201.165.201
 
-  roles:
-    - runner
+#  roles:
+#    - runner
     
 
