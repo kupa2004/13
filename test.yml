@@ -18,9 +18,7 @@
     ec2_key:
       name: mykey325
       region: eu-west-1
-      key_material: "{{ item }}"
     register: ec2_key
-    with_file: ~/.ssh/mykey325.pub
 
   - name: save private key
     copy:
@@ -29,27 +27,15 @@
       mode: 0600
     when: ec2_key.changed
 
-  - name: Create an EC2 key
-    ec2_key:
-      name: mykey325
-      key_material: "{{ lookup('file', '/tmp/mykey325.pub') }}"
-      region: eu-west-1
-    register: ec2_key
-
   - name: create instance
     ec2:
       key_name: mykey325
       group: MyGroup325
-      vpc_subnet_id: subnet-29e63245
-      region: eu-west-1
       instance_type: t2.micro
       image: ami-04505e74c0741db8d
-      wait: yes
-      wait_timeout: 500
       volumes:
         - device_name: /dev/sdh
           volume_size: 15
-      vpc_subnet_id: subnet-29e63245
       assign_public_ip: yes
       count_tag:
         Name: dbserver
