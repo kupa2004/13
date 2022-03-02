@@ -16,20 +16,20 @@
 
   - name: Create an EC2 key
     ec2_key:
-      name: key326
+      name: mykey325
       region: eu-west-1
     register: ec2_key
 
   - name: save private key
     copy:
       content: "{{ ec2_key.key.private_key }}"
-      dest: "./key326.pem"
+      dest: "~/.ssh/mykey325.pem"
       mode: 0600
     when: ec2_key.changed
 
   - name: create instance
     ec2:
-      key_name: key326
+      key_name: mykey325
       group: MyGroup325
       vpc_subnet_id: subnet-29e63245
       region: eu-west-1
