@@ -49,17 +49,15 @@
       count_tag:
         Name: dbserver1
       exact_count: 1
-    tasks:
-    - debug:
-      var: ansible_all_ipv4_addresses
 
-    - name: package boxfuse
-      hosts: inst1
-      remote_user: root
-      become: true
+      tasks:
+      - name: package boxfuse
+        hosts: inst1
+        remote_user: root
+        become: true
 
-      roles:
-        - builder
+        roles:
+          - builder
 
   - name: create instance 1
     ec2:
@@ -77,6 +75,7 @@
       count_tag:
         Name: dbserver2
       exact_count: 1
+
       tasks:
       - name: run boxfuse
         hosts: builder
