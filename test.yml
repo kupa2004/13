@@ -1,5 +1,6 @@
 ---
 - name: create a security group in AWS
+  hosts: localhost
   ec2_group:
     name: MyGroup325
     description: allow 22 port
@@ -11,6 +12,7 @@
         cidr_ip: 0.0.0.0/0
 
 - name: create a new ec2 key pair
+  hosts: localhost
   ec2_key:
     name: key325
     region: us-east-1
@@ -18,13 +20,15 @@
   register: keypair
 
 - name: Give permissions 400 to an existing file my-key325.pem
+  hosts: localhost
   builtin.file:
     path: ~/.ssh/my-key325.pem
     owner: root
     group: root
     mode: '400'
 
-- name:
+- name: create instance
+  hosts: localhost
   ec2:
     key_name: key325
     group: MyGroup325
