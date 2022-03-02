@@ -17,6 +17,7 @@
   - name: Create an EC2 key
     ec2_key:
       name: mykey325
+      public_key: "{{ lookup('file', '/tmp/mykey325.pub') }}"
       region: eu-west-1
     register: ec2_key
 
@@ -26,11 +27,6 @@
       dest: "~/.ssh/mykey325.pem"
       mode: 0600
     when: ec2_key.changed
-
-  - name: Upload the public key to EC2 as a new key pair
-    ec2_key_pair:
-      name: mykey325
-      public_key: "{{ lookup('file', '/tmp/mykey325.pub') }}"
 
   - name: create instance
     ec2:
