@@ -41,6 +41,7 @@
 
   - name: Create instance 1
     ec2_instance:
+      name: runbuild
       network:
         assign_public_ip: true
       key_name: my-key325
@@ -51,9 +52,8 @@
       wait: true
       volumes:
         - device_name: /dev/sdh
-      name: runbuild
-      state: running
-    register: ec2
+          ebs:
+            volume_size: 16
 
   - name: Add new instance 1 to host group
     add_host:
