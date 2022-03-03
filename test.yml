@@ -24,9 +24,9 @@
     ec2_key:
       name: mykey325
       region: "{{ region }}"
-      key_material: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+      key_material: "{{ lookup('file', '{{ ansible_env.HOME }}/.ssh/id_rsa.pub') }}"
     register: ec2_key
-
+    
   - name: Save private key
     copy:
       content: "{{ ec2_key.key.private_key }}"
