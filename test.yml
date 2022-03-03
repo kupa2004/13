@@ -53,8 +53,8 @@
 
   - name: Add new instance 1 to host group
     add_host:
-      name: "{{ ec2.instances[0].public_ip }}"
-      group: runbuild
+      hostname: "{{ item.public_ip }}"
+      groupname: runbuild
     loop: "{{ ec2.instances }}"
 
   - name: Wait for SSH to come up
@@ -84,8 +84,8 @@
 
   - name: Add new instance 2 to host group
     add_host:
-      name: "{{ ec2.instances[0].public_ip }}"
-      groups: testapp
+      hostname: "{{ item.public_ip }}"
+      groupname: testapp
     loop: "{{ ec2.instances }}"
 
   - name: Wait for SSH to come up
