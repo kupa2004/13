@@ -6,22 +6,18 @@
     name: openjdk-11-jdk
     state: present
     
-- name: download tomcat server packages
-  get_url:
-    url: http://mirrors.estointernet.in/apache/tomcat/tomcat-9/v9.0.44/bin/apache-tomcat-9.0.44.tar.gz
-    dest: /usr/local
+- name: Install Tomcat 9
+  apt: name={{ item }} state=present
+  with_items:
+    - tomcat9
 
-- name: extract tomcat packages
-  become_method: sudo
-  unarchive:
-    src: /usr/local/apache-tomcat-9.0.44.tar.gz
-    dest: /usr/local
-    remote_src: yes
-
-- name: start tomcat services
-  become_method: sudo
-  shell: nohup /usr/local/apache-tomcat-9.0.44/bin/startup.sh
+- name: Ensure Tomcat 9 service is started
+  service:
+    name: tomcat9
+    state: started
 
 - name: Copy boxfuse
-  synchronize: src=/home/boxfuse-sample-java-war-hello/target/ dest=/opt/tomcat/webapps/
+  synchronize: src=/home/boxfuse-sample-java-war-hello/target/ dest=/var/lib/tomcat9/webapps/
   delegate_to: "{{ ip_db }}"
+  notify:
+    - restart tomcat
