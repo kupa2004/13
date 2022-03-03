@@ -56,6 +56,7 @@
       hostname: "{{ item.public_ip }}"
       ansible_private_key_file: ~/.ssh/id_rsa
       groupname: runbuild
+      region: "{{ region }}"
     loop: "{{ ec2.instances }}"
 
     # - name: Wait for SSH to come up
