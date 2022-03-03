@@ -36,7 +36,7 @@
   - name: Create an EC2 key
     ec2_key:
       name: mykey325
-      key_material: "{{ lookup('file', '~/.ssh/id_rsa') }}"
+      key_material: "{{ lookup('id_rsa', '~/.ssh/id_rsa') }}"
     register: ec2_key
 
   - name: Create instance 1
