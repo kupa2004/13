@@ -117,8 +117,5 @@
   become: yes
   become_user: root
 
-  vars:
-    ip_db:  runbuild
-
   roles:
     - runner
