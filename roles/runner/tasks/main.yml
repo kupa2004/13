@@ -6,6 +6,11 @@
     name: openjdk-11-jdk
     state: present
     
+ - name: Install modules
+  apt:
+    name: python3
+    state: present
+    
 - name: Install Tomcat 9
   apt: name={{ item }} state=present
   with_items:
