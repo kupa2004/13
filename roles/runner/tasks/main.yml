@@ -24,6 +24,7 @@
     mode: 0755
 
 - name: download & unarchive
+  become_method: sudo
   unarchive:
     src: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.58/bin/apache-tomcat-9.0.58.tar.gz
     dest: /etc/systemd/system/
