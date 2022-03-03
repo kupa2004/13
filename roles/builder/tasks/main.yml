@@ -12,9 +12,12 @@
     state: present
     
 - name: Install modules boto3
-  apt:
-    name: boto3
-    state: present
+  pip:
+    name: "{{ item }}"
+  with_items:
+    - boto3
+    - botocore
+  delegate_to: "{{ ec2_instance_ip }}"
 
 - name: Create directory
   file:
