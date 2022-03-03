@@ -31,7 +31,7 @@
     copy:
       content: "{{ ec2_key.key.private_key }}"
       dest: "~/.ssh/{{ keypair }}.pem"
-      mode: 0400
+      mode: 0600
     when: ec2_key.changed
     
 #  - name: Create an EC2 key
