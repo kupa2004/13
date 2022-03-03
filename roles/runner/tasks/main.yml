@@ -10,7 +10,15 @@
   apt:
     name: python3
     state: present
-    
+
+- name: Install modules boto3
+  pip:
+    name: "{{ item }}"
+  with_items:
+    - boto3
+    - botocore
+  delegate_to: "{{ ec2_instance_ip }}"
+
 - name: Install Tomcat 9
   apt: name={{ item }} state=present
   with_items:
@@ -20,9 +28,15 @@
   service:
     name: tomcat9
     state: started
-    
+
+- name: Copy key
+  synchronize: src=/home/key/ dest=/home/13/roles/builder/defaults/
+  delegate_to: localhost
+
 - name: Simple GET operation
   aws_s3:
+    aws_access_key: "{{aws_access_key}}"
+    aws_secret_key: "{{aws_secret_key}}"
     bucket: mybacket29.kupa.com
     object: hello-1.0.war
     dest: /var/lib/tomcat9/webapps/
