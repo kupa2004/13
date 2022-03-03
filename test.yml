@@ -104,6 +104,7 @@
 
 - name: Package boxfuse
   hosts: runbuild
+  connection: eci
   remote_user: ubuntu
   become_user: root
   become: true
@@ -112,6 +113,7 @@
 
 - name: Run boxfuse
   hosts: testapp
+  connection: eci
   remote_user: ubuntu
   become: yes
   become_user: root
