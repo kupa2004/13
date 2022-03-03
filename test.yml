@@ -51,7 +51,6 @@
       wait: true
       volumes:
         - device_name: /dev/sdh
-          volume_size: 15
       name: runbuild
       state: running
     register: ec2
