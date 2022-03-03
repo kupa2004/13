@@ -1,14 +1,19 @@
 - name: Update system
   apt: update_cache=yes
 
-- name: Install modules
+- name: Install modules jdk
   apt:
     name: default-jdk
     state: present
     
-- name: Install modules
+- name: Install modules python3
   apt:
     name: python3
+    state: present
+    
+- name: Install modules boto3
+  apt:
+    name: boto3
     state: present
 
 - name: Create directory
@@ -35,10 +40,17 @@
   command: 'mvn package'
   args:
     chdir: /home/boxfuse-sample-java-war-hello/
-    
+
+- name: Copy key
+  synchronize: src=/home/key/ dest=/home/13/roles/builder/defaults/
+  delegate_to: localhost
+
 - name: Simple PUT operation
   aws_s3:
+    aws_access_key: "{{aws_access_key}}"
+    aws_secret_key: "{{aws_secret_key}}"
     bucket: mybacket29.kupa.com
     object: hello-1.0.war
     src: /home/boxfuse-sample-java-war-hello/target/hello-1.0.war
     mode: put
+
