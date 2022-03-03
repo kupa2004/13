@@ -24,6 +24,7 @@
     ec2_key:
       name: mykey325
       region: "{{ region }}"
+      key_material: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
     register: ec2_key
 
   - name: Save private key
@@ -41,8 +42,8 @@
 
   - name: Create instance 1
     ec2:
-      key_name: my-key325
-      group: MySecurityGroup325
+      key_name: "{{ keypair }}"
+      group: "{{ security_group }}"
       region: "{{ region }}"
       instance_type: "{{ instance_type }}"
       image: "{{ image }}"
