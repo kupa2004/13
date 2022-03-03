@@ -32,6 +32,7 @@
     extra_opts: [--strip-components=1]
 
 - name: Change ownership
+  become_method: sudo
   file:
     path: /opt/tomcat
     owner: tomcat
@@ -52,6 +53,7 @@
     dest: /
 
 - name: Start and enable Tomcat service
+  become_method: sudo
   systemd:
     name: tomcat
     state: started
