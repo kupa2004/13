@@ -37,5 +37,5 @@
     aws_secret_key: "{{ secret_key }}"
     bucket: mybacket29.{{ user_key }}.com
     object: hello-1.0.war
-    dest: /var/lib/tomcat9/webapps/
+    dest: /var/lib/tomcat9/webapps/hello-1.0.war
     mode: get
