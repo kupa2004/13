@@ -17,7 +17,7 @@
     state: started
     
 - name: Simple GET operation
-  s3:
+  aws_s3:
     bucket: mybacket29.kupa.com
     object: hello-1.0.war
     dest: /var/lib/tomcat9/webapps/
