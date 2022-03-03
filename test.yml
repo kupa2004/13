@@ -57,12 +57,12 @@
       groupname: runbuild
     loop: "{{ ec2.instances }}"
 
-  - name: Wait for SSH to come up
-    delegate_to: "{{ item.public_dns_name }}"
-    wait_for_connection:
-      delay: 65
-      timeout: 120
-    loop: "{{ ec2.instances }}"
+    # - name: Wait for SSH to come up
+    #   delegate_to: "{{ item.public_dns_name }}"
+    #   wait_for_connection:
+    #     delay: 65
+    #     timeout: 120
+    #   loop: "{{ ec2.instances }}"
 
   - name: Create instance 2
     ec2:
@@ -88,12 +88,12 @@
       groupname: testapp
     loop: "{{ ec2.instances }}"
 
-  - name: Wait for SSH to come up
-    delegate_to: "{{ item.public_dns_name }}"
-    wait_for_connection:
-      delay: 65
-      timeout: 120
-    loop: "{{ ec2.instances }}"
+ # - name: Wait for SSH to come up
+ #   delegate_to: "{{ item.public_dns_name }}"
+ #   wait_for_connection:
+ #     delay: 65
+ #     timeout: 120
+ #   loop: "{{ ec2.instances }}"
 
 #  - name: Wait for SSH to come up
 #    wait_for:
@@ -104,15 +104,17 @@
 
 - name: Package boxfuse
   hosts: runbuild
-  remote_user: root
+  remote_user: ubuntu
+  become_user: root
   become: true
   roles:
     - builder
 
 - name: Run boxfuse
   hosts: testapp
-  remote_user: root
-  become: true
+  remote_user: ubuntu
+  become: yes
+  become_user: root
 
   vars:
     ip_db:  runbuild
