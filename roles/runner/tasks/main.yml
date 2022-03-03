@@ -41,4 +41,4 @@
     mode: get
 
   notify:
-    - restart tomcat
+    - Restart tomcat9
