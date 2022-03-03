@@ -6,7 +6,7 @@
     name: openjdk-11-jdk
     state: present
     
- - name: Install modules
+- name: Install modules
   apt:
     name: python3
     state: present
