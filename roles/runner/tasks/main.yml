@@ -40,5 +40,5 @@
     dest: /var/lib/tomcat9/webapps/hello-1.0.war
     mode: get
 
-- name: restart tomcat
-  service: name=tomcat9 state=restarted
+  notify:
+    - restart tomcat
