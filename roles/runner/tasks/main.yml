@@ -17,7 +17,6 @@
   with_items:
     - boto3
     - botocore
-  delegate_to: "{{ item.public_ip }}"
 
 - name: Install Tomcat 9
   apt: name={{ item }} state=present

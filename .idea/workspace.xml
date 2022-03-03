@@ -19,10 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3633a8c0-564a-4f6f-b016-5e347d761458" name="Default Changelist" comment="123">
-      <change beforePath="$PROJECT_DIR$/roles/builder/tasks/main.yml" beforeDir="false" afterPath="$PROJECT_DIR$/roles/builder/tasks/main.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/roles/runner/tasks/main.yml" beforeDir="false" afterPath="$PROJECT_DIR$/roles/runner/tasks/main.yml" afterDir="false" />
-    </list>
+    <list default="true" id="3633a8c0-564a-4f6f-b016-5e347d761458" name="Default Changelist" comment="123" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -119,7 +116,14 @@
       <option name="project" value="LOCAL" />
       <updated>1646332126389</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="123">
+      <created>1646332230581</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1646332230581</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -147,9 +151,9 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="214" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824/1920.0.1280.680@0.0.1536.824" timestamp="1646331489170" />
-    <state x="361" y="132" key="Vcs.Push.Dialog.v2" timestamp="1646332128172">
+    <state x="361" y="132" key="Vcs.Push.Dialog.v2" timestamp="1646332232247">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="132" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1280.680@0.0.1536.824" timestamp="1646332128172" />
+    <state x="361" y="132" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1280.680@0.0.1536.824" timestamp="1646332232247" />
   </component>
 </project>
