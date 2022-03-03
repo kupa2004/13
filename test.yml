@@ -40,20 +40,20 @@
 #    register: ec2_key
 
   - name: Create instance 1
-    ec2_instance:
-      name: runbuild
-      network:
-        assign_public_ip: true
+    ec2:
       key_name: my-key325
-      security_group: MySecurityGroup325
+      group: MySecurityGroup325
       region: "{{ region }}"
       instance_type: "{{ instance_type }}"
-      image_id: "{{ image }}"
-      wait: true
+      image: "{{ image }}"
+      wait: yes
       volumes:
         - device_name: /dev/sdh
-          ebs:
-            volume_size: 16
+          volume_size: 15
+      instance_tags:
+          Name: TestBuild
+      count: 1
+    register: ec2
 
   - name: Add new instance 1 to host group
     add_host:
@@ -61,7 +61,7 @@
       ansible_private_key_file: ~/.ssh/id_rsa
       groupname: runbuild
       region: "{{ region }}"
-
+    loop: "{{ ec2.instances }}"
 
     # - name: Wait for SSH to come up
     #   delegate_to: "{{ item.public_dns_name }}"
