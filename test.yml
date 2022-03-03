@@ -29,20 +29,20 @@
   - name: Save private key
     copy:
       content: "{{ ec2_key.key.private_key }}"
-      dest: "~/.ssh/id_rsa"
+      dest: "~/.ssh/id_rsa.pem"
       mode: 0600
     when: ec2_key.changed
     
-  - name: Create an EC2 key
-    ec2_key:
-      name: mykey325
-      key_material: "{{ lookup('id_rsa', '~/.ssh/id_rsa') }}"
-    register: ec2_key
+#  - name: Create an EC2 key
+#    ec2_key:
+#      name: mykey325
+#      key_material: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+#    register: ec2_key
 
   - name: Create instance 1
     ec2_instance:
-      key_name: "{{ keypair }}"
-      security_group: "{{ security_group }}"
+      key_name: my-key325
+      security_group: MySecurityGroup325
       region: "{{ region }}"
       instance_type: "{{ instance_type }}"
       image_id: "{{ image }}"
