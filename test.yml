@@ -41,14 +41,14 @@
 
   - name: Create instance 1
     ec2_instance:
-      assign_public_ip: yes
+      network:
+        assign_public_ip: true
       key_name: my-key325
       security_group: MySecurityGroup325
       region: "{{ region }}"
       instance_type: "{{ instance_type }}"
       image_id: "{{ image }}"
       wait: true
-      vpc_subnet_id: subnet-03875df7d1f032bad
       volumes:
         - device_name: /dev/sdh
           ebs:
