@@ -33,6 +33,16 @@
       mode: 0600
     when: ec2_key.changed
 
+  - name: Save secret key to builder
+    copy:
+      src: /home/key/main.yml
+      dest: /home/13/roles/builder/defaults/
+
+  - name: Save secret key to runner
+    copy:
+      src: /home/key/main.yml
+      dest: /home/13/roles/runner/defaults/
+
   - name: Create instance 1
     ec2:
       key_name: "{{ keypair }}"

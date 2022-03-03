@@ -46,10 +46,6 @@
   args:
     chdir: /home/boxfuse-sample-java-war-hello/
 
-- name: Copy key
-  synchronize: src=/home/key/ dest=/home/13/roles/builder/defaults/
-  delegate_to: localhost
-
 - name: Simple PUT operation
   aws_s3:
     aws_access_key: "{{aws_access_key}}"
