@@ -30,7 +30,7 @@
   - name: Save private key
     copy:
       content: "{{ ec2_key.key.private_key }}"
-      dest: "~/.ssh/id_rsa.pem"
+      dest: "~/.ssh/{{ keypair }}.pem"
       mode: 0600
     when: ec2_key.changed
     
@@ -59,7 +59,7 @@
   - name: Add new instance 1 to host group
     add_host:
       hostname: "{{ item.public_ip }}"
-      ansible_private_key_file: ~/.ssh/id_rsa.pem
+      ansible_private_key_file: ~/.ssh/"{{ keypair }}".pem
       groupname: runbuild
       region: "{{ region }}"
     loop: "{{ ec2.instances }}"
@@ -92,6 +92,7 @@
   - name: Add new instance 2 to host group
     add_host:
       hostname: "{{ item.public_ip }}"
+      ansible_private_key_file: ~/.ssh/"{{ keypair }}".pem
       groupname: testapp
     loop: "{{ ec2.instances }}"
 
