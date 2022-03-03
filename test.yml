@@ -59,7 +59,7 @@
   - name: Add new instance 1 to host group
     add_host:
       hostname: "{{ item.public_ip }}"
-      ansible_private_key_file: ~/.ssh/"{{ keypair }}".pem
+      ansible_private_key_file: ~/.ssh/{{ keypair }}.pem
       groupname: runbuild
       region: "{{ region }}"
     loop: "{{ ec2.instances }}"
@@ -92,7 +92,7 @@
   - name: Add new instance 2 to host group
     add_host:
       hostname: "{{ item.public_ip }}"
-      ansible_private_key_file: ~/.ssh/"{{ keypair }}".pem
+      ansible_private_key_file: ~/.ssh/{{ keypair }}.pem
       groupname: testapp
     loop: "{{ ec2.instances }}"
 
