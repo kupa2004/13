@@ -104,6 +104,7 @@
 
 - name: Package boxfuse
   hosts: runbuild
+  private_key_file: ~/.ssh/id_rsa
   remote_user: ubuntu
   become_user: root
   become: true
