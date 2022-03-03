@@ -19,7 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3633a8c0-564a-4f6f-b016-5e347d761458" name="Default Changelist" comment="123" />
+    <list default="true" id="3633a8c0-564a-4f6f-b016-5e347d761458" name="Default Changelist" comment="123">
+      <change beforePath="$PROJECT_DIR$/roles/builder/tasks/main.yml" beforeDir="false" afterPath="$PROJECT_DIR$/roles/builder/tasks/main.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/roles/runner/tasks/main.yml" beforeDir="false" afterPath="$PROJECT_DIR$/roles/runner/tasks/main.yml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -95,7 +98,28 @@
       <option name="project" value="LOCAL" />
       <updated>1646331531247</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="123">
+      <created>1646331754434</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1646331754434</updated>
+    </task>
+    <task id="LOCAL-00006" summary="123">
+      <created>1646331950807</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1646331950807</updated>
+    </task>
+    <task id="LOCAL-00007" summary="123">
+      <created>1646332126389</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1646332126389</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -123,9 +147,9 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="214" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824/1920.0.1280.680@0.0.1536.824" timestamp="1646331489170" />
-    <state x="361" y="132" key="Vcs.Push.Dialog.v2" timestamp="1646331533187">
+    <state x="361" y="132" key="Vcs.Push.Dialog.v2" timestamp="1646332128172">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="132" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1280.680@0.0.1536.824" timestamp="1646331533187" />
+    <state x="361" y="132" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1280.680@0.0.1536.824" timestamp="1646332128172" />
   </component>
 </project>
