@@ -2,7 +2,7 @@
 - hosts: localhost
   remote_user: root
   vars:
-    keypair: mykey32
+    keypair: mykey3
     instance_type: t2.micro
     security_group: MyGroup32
     image: ami-04505e74c0741db8d
@@ -24,21 +24,14 @@
     ec2_key:
       name: "{{ keypair }}"
       region: "{{ region }}"
-    #  key_material: "{{ lookup('file', '{{ ansible_env.HOME }}/.ssh/id_rsa.pub') }}"
     register: ec2_key
     
   - name: Save private key
     copy:
       content: "{{ ec2_key.key.private_key }}"
-      dest: "{{ ansible_env.HOME }}/.ssh/mykey32.pem"
+      dest: "{{ ansible_env.HOME }}/.ssh/{{ keypair }}.pem"
       mode: 0600
-#    when: ec2_key.changed
-    
-#  - name: Create an EC2 key
-#    ec2_key:
-#      name: mykey325
-#      key_material: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
-#    register: ec2_key
+    when: ec2_key.changed
 
   - name: Create instance 1
     ec2:
