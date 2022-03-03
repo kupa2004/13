@@ -5,60 +5,22 @@
   apt:
     name: openjdk-11-jdk
     state: present
+    
+- name: download tomcat server packages
+  get_url:
+    url: http://mirrors.estointernet.in/apache/tomcat/tomcat-9/v9.0.44/bin/apache-tomcat-9.0.44.tar.gz
+    dest: /usr/local
 
-- name: add tomcat group
-  group:
-    name: tomcat
-
-- name: add tomcat user
-  user:
-    name: tomcat
-    group: tomcat
-    home: /user/share/tomcat
-    createhome: no
-
-- name: create /opt/tomcat directory
-  file:
-    path: /opt/tomcat
-    state: directory
-    mode: 0755
-
-- name: download & unarchive
+- name: extract tomcat packages
   become_method: sudo
   unarchive:
-    src: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.58/bin/apache-tomcat-9.0.58.tar.gz
-    dest: /etc/systemd/system/
+    src: /usr/local/apache-tomcat-9.0.44.tar.gz
+    dest: /usr/local
     remote_src: yes
-    extra_opts: [--strip-components=1]
 
-- name: Change ownership
+- name: start tomcat services
   become_method: sudo
-  file:
-    path: /opt/tomcat
-    owner: tomcat
-    group: tomcat
-    mode: "u+rwx,g+rx,o=rx"
-    recurse: yes
-    state: directory
-
-- name: Copy Tomcat service from local to remote
-  copy:
-    src: tomcat.service
-    dest: /etc/systemd/system/
-    mode: 0755
-
-- name: Move tomcat.service
-  copy:
-    src: tomcat.service
-    dest: /
-
-- name: Start and enable Tomcat service
-  become_method: sudo
-  systemd:
-    name: tomcat
-    state: started
-    enabled: true
-    daemon_reload: true
+  shell: nohup /usr/local/apache-tomcat-9.0.44/bin/startup.sh
 
 - name: Copy boxfuse
   synchronize: src=/home/boxfuse-sample-java-war-hello/target/ dest=/opt/tomcat/webapps/
