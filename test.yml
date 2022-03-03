@@ -54,6 +54,7 @@
         - device_name: /dev/sdh
           ebs:
             volume_size: 16
+    register: ec2
 
   - name: Add new instance 1 to host group
     add_host:
