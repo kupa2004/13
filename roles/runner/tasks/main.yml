@@ -15,9 +15,10 @@
   service:
     name: tomcat9
     state: started
-
-- name: Copy boxfuse
-  synchronize: src=/home/boxfuse-sample-java-war-hello/target/ dest=/var/lib/tomcat9/webapps/
-  delegate_to: "{{ ip_db }}"
-  notify:
-    - restart tomcat
+    
+- name: Simple GET operation
+  amazon.aws.aws_s3:
+    bucket: mybacket29.kupa.com
+    object: hello-1.0.war
+    dest: /var/lib/tomcat9/webapps/
+    mode: get
