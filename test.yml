@@ -2,16 +2,16 @@
 - hosts: localhost
   remote_user: root
   vars:
-    keypair: mykey325
+    keypair: mykey32
     instance_type: t2.micro
-    security_group: MyGroup325
+    security_group: MyGroup32
     image: ami-04505e74c0741db8d
     region: us-east-1
 
   tasks:
   - name: Create a security group in AWS
     ec2_group:
-      name: MyGroup325
+      name: "{{ security_group }}"
       description: allow 22 port
       region: "{{ region }}"
       rules:
@@ -22,9 +22,9 @@
 
   - name: Create an EC2 key
     ec2_key:
-      name: mykey325
+      name: "{{ keypair }}"
       region: "{{ region }}"
-      key_material: "{{ lookup('file', '{{ ansible_env.HOME }}/.ssh/id_rsa.pub') }}"
+    #  key_material: "{{ lookup('file', '{{ ansible_env.HOME }}/.ssh/id_rsa.pub') }}"
     register: ec2_key
     
   - name: Save private key
