@@ -6,7 +6,9 @@ cd /home/key
 ~~~
 
 Create a file in /home/key
+~~~
 nano main.yml
+~~~
 
 Add three variables to the file
 
