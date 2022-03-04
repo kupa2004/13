@@ -17,3 +17,7 @@ Add three variables to the file
 ~~~
  
 # Clone git repository to folder /home/
+~~~
+cd /home/
+git clone https://github.com/kupa2004/13.git
+~~~
